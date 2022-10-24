@@ -84,7 +84,7 @@ img {
 
 .carta-virada {
     transform: rotateY(180deg);
-    transition: all 1.5s;
+    transition: all 1.0s;
     transform-style: preserve-3d;
 }
 

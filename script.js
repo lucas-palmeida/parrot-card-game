@@ -50,28 +50,28 @@ function selecionarCarta(carta){
             quantidadeCartas -= 2;
             primeiraCarta.onclick = cancela;
             carta.onclick = cancela;
-            let resposta = null;
-            if(quantidadeCartas == 0) {
-                clearInterval(relogio);
-                alert(`Você ganhou em ${contaJogadas} jogadas e ${segundos} segundos!`);
-                while(resposta != "sim" && resposta != "não") {
-                    resposta = prompt("Deseja reiniciar a partida (sim/não)?");
-                }
-                if(resposta === "sim"){
-                    document.querySelector("main").innerHTML = "";
-                    segundos = 0;
-                    contaJogadas = 0;
-                    document.querySelector(".relogio").innerHTML = segundos;
-                    solicitaNrCartas();
-                }
-                else {
-                    alert("Jogo finalizado.");
-                }
+            setTimeout(verificaPar, 1000);
+            function verificaPar(){
+                let resposta = null;
+                        if(quantidadeCartas == 0) {
+                            clearInterval(relogio);
+                            alert(`Você ganhou em ${contaJogadas} jogadas e ${segundos} segundos!`);
+                            while(resposta != "sim" && resposta != "não") {
+                                resposta = prompt("Deseja reiniciar a partida (sim/não)?");
+                            }
+                            if(resposta === "sim"){
+                                resetarValores();
+                                solicitaNrCartas();
+                            }
+                            else {
+                                alert("Jogo finalizado.");
+                            }
+                        }
             }
         }
         else {
-            tempoEspera = setTimeout(virarCarta, 1000, primeiraCarta);
-            tempoEspera = setTimeout(virarCarta, 1000, carta);
+            setTimeout(virarCarta, 1000, primeiraCarta);
+            setTimeout(virarCarta, 1000, carta);
         }
     }
 }
@@ -95,4 +95,11 @@ function embaralhar() {
 
 function cancela() {
     return false;
+}
+
+function resetarValores(){
+    document.querySelector("main").innerHTML = "";
+    segundos = 0;
+    contaJogadas = 0;
+    document.querySelector(".relogio").innerHTML = segundos;
 }
